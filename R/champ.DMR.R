@@ -110,8 +110,10 @@ champ.DMR <- function(beta=myNorm,
 
         X <- cbind(1,(as.numeric(as.factor(pheno))-1))
         Beta <- beta[bumphunter.idx,]
-        Beta <- replace(Beta,which(Beta <= 0.001),0.001)
-        Beta <- replace(Beta,which(Beta >= 0.999),0.999)
+        # Beta <- replace(Beta,which(Beta <= 0.001),0.001)
+        # Beta <- replace(Beta,which(Beta >= 0.999),0.999)
+        Beta[Beta <= 0.001] <- 0.001
+        Beta[Beta >= 0.999] <- 0.999
         Y <- log((Beta/(1-Beta)),2)
         
         Bumps <- bumphunter(Y,
